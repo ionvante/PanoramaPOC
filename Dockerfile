@@ -1,6 +1,5 @@
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-
 # copy csproj and restore as distinct layers
 COPY Panorama.API/Panorama.API.csproj Panorama.API/
 RUN dotnet restore Panorama.API/Panorama.API.csproj
@@ -20,5 +19,3 @@ ENV ASPNETCORE_URLS=http://+:80 \
 
 EXPOSE 80
 EXPOSE 443
-
-ENTRYPOINT ["dotnet", "Panorama.API.dll"]

@@ -4,6 +4,11 @@ using System.Text.Json;
 using Panorama.API.Models;
 
 using System.Linq;
+using System;
+using System.Threading.Tasks;
+using System.Collections.Generic;
+using System.Net.Http;
+using Microsoft.Extensions.Configuration;
 namespace Panorama.API.Services;
 
 public class SupabaseService
