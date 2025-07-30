@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+
 namespace Panorama.API.Models;
 
 public class FlowValidation

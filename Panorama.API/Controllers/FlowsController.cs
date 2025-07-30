@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Mvc;
 using Panorama.API.Models;
 using System.Collections.Generic;
 using Panorama.API.Services;
+using System.Threading.Tasks;
+using System;
 
 namespace Panorama.API.Controllers;
 
@@ -30,7 +32,7 @@ public class FlowsController : ControllerBase
     }
 
     [HttpGet("{id}/validations")]
-    public async Task<ActionResult<IEnumerable<FlowValidationItem>>> GetValidations(Guid id)
+    public async Task<ActionResult<IEnumerable<FlowValidationItem>>> GetValidations(System.Guid id)
     {
         var items = await _service.GetValidationItemsAsync(id);
         return Ok(items);
