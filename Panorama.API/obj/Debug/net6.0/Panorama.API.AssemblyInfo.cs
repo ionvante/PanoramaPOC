@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Panorama.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+02993a70b2eb68cca7e6c68287ee76e620de6352")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cc312da9f1de5fdd47d62b884409c33e65903654")]
 [assembly: System.Reflection.AssemblyProductAttribute("Panorama.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Panorama.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
