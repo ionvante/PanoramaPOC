@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "H:\\Proyectos\\Forjix\\POC_Panorama\\API\\PanoramaPOC\\Panorama.API\\Panorama.API.csproj": {}
+    "h:\\Proyectos\\Forjix\\POC_Panorama\\API\\PanoramaPOC\\Panorama.API\\Panorama.API.csproj": {}
   },
   "projects": {
-    "H:\\Proyectos\\Forjix\\POC_Panorama\\API\\PanoramaPOC\\Panorama.API\\Panorama.API.csproj": {
+    "h:\\Proyectos\\Forjix\\POC_Panorama\\API\\PanoramaPOC\\Panorama.API\\Panorama.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "H:\\Proyectos\\Forjix\\POC_Panorama\\API\\PanoramaPOC\\Panorama.API\\Panorama.API.csproj",
+        "projectUniqueName": "h:\\Proyectos\\Forjix\\POC_Panorama\\API\\PanoramaPOC\\Panorama.API\\Panorama.API.csproj",
         "projectName": "Panorama.API",
-        "projectPath": "H:\\Proyectos\\Forjix\\POC_Panorama\\API\\PanoramaPOC\\Panorama.API\\Panorama.API.csproj",
+        "projectPath": "h:\\Proyectos\\Forjix\\POC_Panorama\\API\\PanoramaPOC\\Panorama.API\\Panorama.API.csproj",
         "packagesPath": "C:\\Users\\Churrucutito\\.nuget\\packages\\",
-        "outputPath": "H:\\Proyectos\\Forjix\\POC_Panorama\\API\\PanoramaPOC\\Panorama.API\\obj\\",
+        "outputPath": "h:\\Proyectos\\Forjix\\POC_Panorama\\API\\PanoramaPOC\\Panorama.API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Churrucutito\\AppData\\Roaming\\NuGet\\NuGet.Config"
