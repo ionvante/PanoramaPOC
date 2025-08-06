@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using Panorama.API.Services;
 using System.Threading.Tasks;
 using System;
+using System.Net.Http;
+using System.Text.Json;
 
 namespace Panorama.API.Controllers;
 
@@ -27,8 +29,24 @@ public class FlowsController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<Flow>> CreateFlow([FromBody] Flow flow)
     {
-        var created = await _service.CreateFlowAsync(flow);
-        return CreatedAtAction(nameof(GetFlows), new { id = created?.Id }, created);
+        try
+        {
+            if (string.IsNullOrWhiteSpace(flow.Status))
+                flow.Status = "Registrado";
+            // Si el Id no fue seteado, no lo enviamos en el JSON para que Supabase lo genere
+            if (flow.Id == Guid.Empty)
+                flow.Id = Guid.NewGuid(); // O dejarlo nulo si tu modelo lo permite
+            
+            var created = await _service.CreateFlowAsync(flow);
+            if (created == null)
+                return BadRequest("No se pudo crear el flujo. Verifica los datos enviados.");
+
+            return CreatedAtAction(nameof(GetFlows), new { id = created.Id }, created);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, $"Error al crear el flujo: {ex.Message}");
+        }
     }
 
     [HttpGet("{id}/validations")]

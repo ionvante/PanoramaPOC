@@ -56,16 +56,70 @@ public class SupabaseService
         }
     }
 
+    // public async Task<Flow?> CreateFlowAsync(Flow flow)
+    // {
+    //     const string errorMessage = "Failed to create flow in Supabase.";
+    //     try
+    //     {
+    //         var content = new StringContent(JsonSerializer.Serialize(flow), Encoding.UTF8, "application/json");
+    //         var response = await _httpClient.PostAsync($"{_baseUrl}/rest/v1/flows", content);
+    //         response.EnsureSuccessStatusCode();
+    //         var json = await response.Content.ReadAsStringAsync();
+    //         var items = JsonSerializer.Deserialize<IEnumerable<Flow>>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+    //         return items?.FirstOrDefault();
+    //     }
+    //     catch (HttpRequestException ex)
+    //     {
+    //         _logger.LogError(ex, errorMessage);
+    //         throw new ApplicationException(errorMessage, ex);
+    //     }
+    //     catch (Exception ex)
+    //     {
+    //         _logger.LogError(ex, errorMessage);
+    //         throw new ApplicationException(errorMessage, ex);
+    //     }
+    // }
     public async Task<Flow?> CreateFlowAsync(Flow flow)
     {
         const string errorMessage = "Failed to create flow in Supabase.";
         try
         {
-            var content = new StringContent(JsonSerializer.Serialize(flow), Encoding.UTF8, "application/json");
+            if (string.IsNullOrWhiteSpace(flow.Status))
+                flow.Status = "Registrado";
+
+            if (flow.Id == Guid.Empty)
+                flow.Id = Guid.NewGuid();
+
+            // Asegurar Prefer para obtener datos si Supabase los soporta
+            _httpClient.DefaultRequestHeaders.Remove("Prefer");
+            _httpClient.DefaultRequestHeaders.Add("Prefer", "return=representation");
+
+            var content = new StringContent(
+                JsonSerializer.Serialize(flow),
+                Encoding.UTF8,
+                "application/json"
+            );
+
             var response = await _httpClient.PostAsync($"{_baseUrl}/rest/v1/flows", content);
+
+            // Esto ya lanza error si el status es >=400
             response.EnsureSuccessStatusCode();
+
             var json = await response.Content.ReadAsStringAsync();
-            var items = JsonSerializer.Deserialize<IEnumerable<Flow>>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+            // ✅ Si no hay contenido, asumimos que fue creado y devolvemos el objeto enviado
+            if (string.IsNullOrWhiteSpace(json))
+            {
+                _logger.LogInformation("Flow created successfully in Supabase but no JSON returned.");
+                return flow; // O return null si prefieres no devolver nada
+            }
+
+            // Si hay contenido, deserializamos normalmente
+            var items = JsonSerializer.Deserialize<IEnumerable<Flow>>(json, new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            });
+
             return items?.FirstOrDefault();
         }
         catch (HttpRequestException ex)
@@ -79,7 +133,6 @@ public class SupabaseService
             throw new ApplicationException(errorMessage, ex);
         }
     }
-
     public async Task<IEnumerable<FlowValidationItem>> GetValidationItemsAsync(Guid flowId)
     {
         const string errorMessage = "Failed to retrieve validation items from Supabase.";
