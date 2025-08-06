@@ -27,3 +27,13 @@ export Database__Password=mi_password
 ```
 
 De esta manera la configuracion es facilmente modificable segun el entorno.
+
+## Ejecución con Docker
+
+Para construir y ejecutar el servicio con Docker Compose utilice:
+
+```bash
+docker compose up --build
+```
+
+El servicio quedará disponible en `http://localhost:8080`.

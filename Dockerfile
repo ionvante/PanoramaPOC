@@ -19,3 +19,5 @@ ENV ASPNETCORE_URLS=http://+:80 \
 
 EXPOSE 80
 EXPOSE 443
+
+ENTRYPOINT ["dotnet", "Panorama.API.dll"]
